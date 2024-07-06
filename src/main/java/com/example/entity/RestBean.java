@@ -22,7 +22,11 @@ public class RestBean<T> {
         return new RestBean<>(200,true,data);
     }
 
-    public static <T> RestBean<T> failure(int status,T data){
-        return new RestBean<>(status,false,null);
+    public static <T> RestBean<T> failure(int status) {
+        return new RestBean<>(status, false, null);
+    }
+
+    public static <T> RestBean<T> failure(int status, T data) {
+        return new RestBean<>(status, false, data);
     }
 }

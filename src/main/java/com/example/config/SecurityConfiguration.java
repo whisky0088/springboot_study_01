@@ -67,12 +67,13 @@ public class SecurityConfiguration {
     public PersistentTokenRepository tokenRepository(){
         JdbcTokenRepositoryImpl jdbcTokenRepository=new JdbcTokenRepositoryImpl();
         jdbcTokenRepository.setDataSource(dataSource);
-        //jdbcTokenRepository.setCreateTableOnStartup(true);
+        jdbcTokenRepository.setCreateTableOnStartup(true);
         return jdbcTokenRepository;
     }
     private CorsConfigurationSource configurationSource(){
         CorsConfiguration cors=new CorsConfiguration();
         cors.addAllowedOriginPattern("http://localhost:5173");
+//        cors.addAllowedOriginPattern("http://121.199.20.42:7777");
         cors.setAllowCredentials(true);
         cors.addAllowedHeader("*");
         cors.addAllowedMethod("*");
@@ -103,8 +104,5 @@ public class SecurityConfiguration {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(JSONObject.toJSONString(RestBean.failure(401,exception.getMessage())));
-    }
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
-
     }
 }
